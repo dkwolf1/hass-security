@@ -34,7 +34,7 @@ docker run -it --rm -p 8080:8080 \
 ghcr.io/analogj/scrutiny:master-omnibus
 
 # in another terminal trigger the collector
-docker exec scrutiny scrutiny-collector-metrics run
+docker exec scrutiny hass-security-collector-metrics run
 ```
 
 The log files will be available on your host in the `config` directory. Please attach them to this issue. 
