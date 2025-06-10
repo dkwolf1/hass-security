@@ -54,15 +54,11 @@ fabric.properties
 .idea/httpRequests
 
 
-scrutiny.db
 /dist/
 vendor
 /hass-security
 /hass-security-collector-metrics-*
 /hass-security-web-*
-scrutiny-*.db
-scrutiny_test.db
-scrutiny.yaml
 coverage.txt
 /config
 /influxdb
