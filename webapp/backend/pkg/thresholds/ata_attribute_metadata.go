@@ -674,7 +674,7 @@ var AtaMetadata = map[int]AtaAttributeMetadata{
 		Transform: func(normValue int64, rawValue int64, rawString string) int64 {
 			// Parse Seagate command timeout values if the string contains 3 pieces
 			// and each piece is less than or equal to the next (as a sanity check)
-			// See https://github.com/AnalogJ/scrutiny/issues/522
+			// See https://github.com/hass-security/hass-security/issues/522
 			pieces := strings.Split(rawString, " ")
 			if len(pieces) == 3 {
 				int_pieces := make([]int, len(pieces))

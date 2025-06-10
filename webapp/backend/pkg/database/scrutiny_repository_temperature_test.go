@@ -1,8 +1,8 @@
 package database
 
 import (
-	mock_config "github.com/analogj/scrutiny/webapp/backend/pkg/config/mock"
 	"github.com/golang/mock/gomock"
+	mock_config "github.com/hass-security/hass-security/webapp/backend/pkg/config/mock"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

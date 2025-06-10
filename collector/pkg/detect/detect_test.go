@@ -5,11 +5,11 @@ import (
 	"strings"
 	"testing"
 
-	mock_shell "github.com/analogj/scrutiny/collector/pkg/common/shell/mock"
-	mock_config "github.com/analogj/scrutiny/collector/pkg/config/mock"
-	"github.com/analogj/scrutiny/collector/pkg/detect"
-	"github.com/analogj/scrutiny/collector/pkg/models"
 	"github.com/golang/mock/gomock"
+	mock_shell "github.com/hass-security/hass-security/collector/pkg/common/shell/mock"
+	mock_config "github.com/hass-security/hass-security/collector/pkg/config/mock"
+	"github.com/hass-security/hass-security/collector/pkg/detect"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -253,7 +253,7 @@ func TestDetect_TransformDetectedDevices_Simple(t *testing.T) {
 	require.Equal(t, "sat+megaraid", transformedDevices[0].DeviceType)
 }
 
-// test https://github.com/AnalogJ/scrutiny/issues/255#issuecomment-1164024126
+// test https://github.com/hass-security/hass-security/issues/255#issuecomment-1164024126
 func TestDetect_TransformDetectedDevices_WithoutDeviceTypeOverride(t *testing.T) {
 	// setup
 	mockCtrl := gomock.NewController(t)

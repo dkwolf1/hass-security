@@ -3,10 +3,10 @@ package database
 import (
 	"context"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 )
 
 // Create mock using:

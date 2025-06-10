@@ -2,9 +2,9 @@ package measurements_test
 
 import (
 	"encoding/json"
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"os"

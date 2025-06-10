@@ -1,6 +1,6 @@
 # UnRAID Install
 
-Installation of Scrutiny in UnRAID follows the same process as installing any other docker container, utilizing the Community Applications plugin
+Installation of Hass-Security in UnRAID follows the same process as installing any other docker container, utilizing the Community Applications plugin
 
 ## Install the 'Community Applications' Plugin
 
@@ -13,20 +13,20 @@ https://raw.githubusercontent.com/Squidly271/community.applications/master/plugi
 
 You're all set with the pre-requisites!
 
-## Installing the Scrutiny docker image
+## Installing the Hass-Security docker image
 
 To install, simply click 'Install'; the configuration parameters should not need modification as the template within CA already defines the necessary parameters.
 
 As a docker image can be created using various OS bases, the image choice is entirely the users choice. Recommendations of a specific image from a specific maintainer is beyond the scope of this guide. However, to provide some context given the number of questions posed regarding the various versions available:
 
-- **ghcr.io/analogj/scrutiny:master-omnibus**
+- **ghcr.io/analogj/hass-security:master-omnibus**
     - `Image maintained directly by the application author`
     - `Debian based docker image`
-- **linuxserver/scrutiny**
+- **linuxserver/hass-security**
     - `Image maintained by the LinuxServer.io group`
     - `Alpine based docker image`
-- **hotio/scrutiny**
+- **hotio/hass-security**
     - `Image maintained by hotio`
     - `DETAILS TBD`
 
-The support for a given image is provided by that images maintainers, while support for the application itself remains with the developer - i.e. LinuxServer.io supports the docker image of Scrutiny which they create, to the extent an issue is specific to that image. If an issue/enhancement pertains directly to the source code, support would still come directly from this repository's contributors. 
+The support for a given image is provided by that images maintainers, while support for the application itself remains with the developer - i.e. LinuxServer.io supports the docker image of Hass-Security which they create, to the extent an issue is specific to that image. If an issue/enhancement pertains directly to the source code, support would still come directly from this repository's contributors. 

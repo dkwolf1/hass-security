@@ -1,7 +1,7 @@
 package m20220503120000
 
 import (
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
 	"time"
 )
 

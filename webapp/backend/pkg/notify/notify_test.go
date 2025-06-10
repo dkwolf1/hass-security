@@ -6,13 +6,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database"
-	mock_database "github.com/analogj/scrutiny/webapp/backend/pkg/database/mock"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database"
+	mock_database "github.com/hass-security/hass-security/webapp/backend/pkg/database/mock"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )

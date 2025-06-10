@@ -1,7 +1,7 @@
 package errors_test
 
 import (
-	"github.com/analogj/scrutiny/webapp/backend/pkg/errors"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/errors"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

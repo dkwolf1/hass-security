@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/config"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/notify"
 	"github.com/gin-gonic/gin"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/config"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/notify"
 	"github.com/sirupsen/logrus"
 )
 

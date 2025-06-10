@@ -13,15 +13,15 @@ import (
 	"time"
 
 	"github.com/analogj/go-util/utils"
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/config"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/thresholds"
 	"github.com/containrrr/shoutrrr"
 	shoutrrrTypes "github.com/containrrr/shoutrrr/pkg/types"
 	"github.com/gin-gonic/gin"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/config"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/thresholds"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 )
@@ -391,7 +391,7 @@ func (n *Notify) GenShoutrrrNotificationParams(shoutrrrUrl string) (string, *sho
 	serviceName := serviceURL.Scheme
 	params := &shoutrrrTypes.Params{}
 
-	logoUrl := "https://raw.githubusercontent.com/AnalogJ/scrutiny/master/webapp/frontend/src/ms-icon-144x144.png"
+	logoUrl := "https://raw.githubusercontent.com/hass-security/hass-security/master/webapp/frontend/src/ms-icon-144x144.png"
 	subject := n.Payload.Subject
 	switch serviceName {
 	// no params supported for these services

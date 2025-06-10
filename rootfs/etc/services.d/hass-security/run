@@ -3,5 +3,5 @@
 echo "waiting for influxdb"
 until $(curl --output /dev/null --silent --head --fail http://localhost:8086/health); do echo "influxdb not ready" && sleep 5; done
 
-echo "starting scrutiny"
-scrutiny start
+echo "starting hass-security"
+hass-security start

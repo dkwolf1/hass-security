@@ -8,11 +8,11 @@ import (
 	context "context"
 	reflect "reflect"
 
-	pkg "github.com/analogj/scrutiny/webapp/backend/pkg"
-	models "github.com/analogj/scrutiny/webapp/backend/pkg/models"
-	collector "github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	measurements "github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
 	gomock "github.com/golang/mock/gomock"
+	pkg "github.com/hass-security/hass-security/webapp/backend/pkg"
+	models "github.com/hass-security/hass-security/webapp/backend/pkg/models"
+	collector "github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	measurements "github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 )
 
 // MockDeviceRepo is a mock of DeviceRepo interface.

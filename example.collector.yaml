@@ -1,6 +1,6 @@
 # Commented Scrutiny Configuration File
 #
-# The default location for this file is /opt/scrutiny/config/collector.yaml.
+# The default location for this file is /opt/hass-security/config/collector.yaml.
 # In some cases to improve clarity default values are specified,
 # uncommented. Other example values are commented out.
 #
@@ -13,7 +13,7 @@
 # Version
 #
 # version specifies the version of this configuration file schema, not
-# the scrutiny binary. There is only 1 version available at the moment
+# the hass-security binary. There is only 1 version available at the moment
 version: 1
 
 # The host id is a label used for identifying groups of disks running on the same host

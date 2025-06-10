@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/analogj/scrutiny/collector/pkg/common/shell"
-	"github.com/analogj/scrutiny/collector/pkg/config"
-	"github.com/analogj/scrutiny/collector/pkg/models"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/collector/pkg/common/shell"
+	"github.com/hass-security/hass-security/collector/pkg/config"
+	"github.com/hass-security/hass-security/collector/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
 	"github.com/sirupsen/logrus"
 )
 

@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/thresholds"
 	"github.com/gin-gonic/gin"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/thresholds"
 	"github.com/sirupsen/logrus"
 )
 

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/thresholds"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/thresholds"
 )
 
 type SmartScsiAttribute struct {
@@ -67,9 +67,8 @@ func (sa *SmartScsiAttribute) Inflate(key string, val interface{}) {
 	}
 }
 
-//
-//populate attribute status, using SMART Thresholds & Observed Metadata
-//Chainable
+// populate attribute status, using SMART Thresholds & Observed Metadata
+// Chainable
 func (sa *SmartScsiAttribute) PopulateAttributeStatus() *SmartScsiAttribute {
 
 	//-1 is a special number meaning no threshold.

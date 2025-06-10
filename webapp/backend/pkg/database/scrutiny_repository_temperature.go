@@ -3,16 +3,16 @@ package database
 import (
 	"context"
 	"fmt"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"strings"
 	"time"
 )
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Temperature Data
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 func (sr *scrutinyRepository) SaveSmartTemperature(ctx context.Context, wwn string, deviceProtocol string, collectorSmartData collector.SmartInfo) error {
 	if len(collectorSmartData.AtaSctTemperatureHistory.Table) > 0 {
 

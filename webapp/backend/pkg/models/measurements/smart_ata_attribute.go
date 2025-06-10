@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/thresholds"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/thresholds"
 )
 
 type SmartAtaAttribute struct {
@@ -91,7 +91,7 @@ func (sa *SmartAtaAttribute) Inflate(key string, val interface{}) {
 	}
 }
 
-//populate attribute status, using SMART Thresholds & Observed Metadata
+// populate attribute status, using SMART Thresholds & Observed Metadata
 // Chainable
 func (sa *SmartAtaAttribute) PopulateAttributeStatus() *SmartAtaAttribute {
 	if strings.ToUpper(sa.WhenFailed) == pkg.AttributeWhenFailedFailingNow {

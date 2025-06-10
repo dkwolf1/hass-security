@@ -3,8 +3,8 @@ package database
 import (
 	"context"
 	"fmt"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/config"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/config"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
 	"github.com/mitchellh/mapstructure"
 	"strings"
 )

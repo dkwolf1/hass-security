@@ -2,7 +2,7 @@ package detect_test
 
 import (
 	"fmt"
-	"github.com/analogj/scrutiny/collector/pkg/detect"
+	"github.com/hass-security/hass-security/collector/pkg/detect"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

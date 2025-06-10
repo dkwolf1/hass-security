@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/analogj/scrutiny/collector/pkg/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/version"
+	"github.com/hass-security/hass-security/collector/pkg/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/version"
 	"github.com/sirupsen/logrus"
 	"io"
 	"log"
@@ -46,7 +46,7 @@ OPTIONS:
 		},
 		Before: func(c *cli.Context) error {
 
-			collectorSelfTest := "AnalogJ/scrutiny/selftest"
+			collectorSelfTest := "hass-security/hass-security/selftest"
 
 			var versionInfo string
 			if len(goos) > 0 && len(goarch) > 0 {
