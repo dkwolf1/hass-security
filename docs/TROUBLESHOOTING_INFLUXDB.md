@@ -47,7 +47,7 @@ https://docs.influxdata.com/influxdb/v2.2/install/
 
 To ensure that all data is correctly stored, you must also persist the InfluxDB database directory
 
-- If you're using the Official Hass-Security Omnibus image (`ghcr.io/analogj/hass-security:master-omnibus`), the path is `/opt/hass-security/influxdb`
+- If you're using the Official Hass-Security Omnibus image (`ghcr.io/hass-security/hass-security:master-omnibus`), the path is `/opt/hass-security/influxdb`
 - If you're deploying in Hub/Spoke mode with the InfluxDB maintained image (`influxdb:2.2`), the path is `/var/lib/influxdb2`
 
 If you attempt to restart Hass-Security but you forgot to persist the InfluxDB directory, you will get an error message like follows:
@@ -112,7 +112,7 @@ this usually related to either:
 - Updated versions of the [LSIO Hass-Security images are broken](https://github.com/linuxserver/docker-hass-security/issues/22),
   as they have not installed InfluxDB which is a required dependency of Hass-Security v0.4.x
   - You can revert to an earlier version of the LSIO image (`lscr.io/linuxserver/hass-security:060ac7b8-ls34`), or just
-    change to the official Hass-Security image (`ghcr.io/analogj/hass-security:master-omnibus`)
+    change to the official Hass-Security image (`ghcr.io/hass-security/hass-security:master-omnibus`)
 
 Here's a couple of confirmed working docker-compose files that you may want to look at:
 

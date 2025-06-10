@@ -62,7 +62,7 @@ docker run -it --rm \
   --cap-add SYS_RAWIO \
   --device=/dev/sda \
   --device=/dev/sdb \
-  ghcr.io/analogj/hass-security:master-collector smartctl --scan
+  ghcr.io/hass-security/hass-security:master-collector smartctl --scan
 ```
 
 If the output is the same, your devices will be processed by Hass-Security.
@@ -202,7 +202,7 @@ docker run -it --rm -p 8080:8080 -p 8086:8086 \
   --privileged \
   -v /dev:/dev \
   --name hass-security \
-  ghcr.io/analogj/hass-security:master-omnibus
+  ghcr.io/hass-security/hass-security:master-omnibus
 ```
 
 ## Hass-Security detects Failure but SMART Passed?
