@@ -161,13 +161,13 @@ docker cp scrutiny:/tmp/web.log web.log
 # Docker Development
 
 ```
-docker build -f docker/Dockerfile . -t chcr.io/analogj/scrutiny:master-omnibus
+docker build -f docker/Dockerfile . -t chcr.io/analogj/hass-security:master-omnibus
 docker run -it --rm -p 8080:8080 \
 -v /run/udev:/run/udev:ro \
 --cap-add SYS_RAWIO \
 --device=/dev/sda \
 --device=/dev/sdb \
-ghcr.io/analogj/scrutiny:master-omnibus
+ghcr.io/analogj/hass-security:master-omnibus
 /opt/hass-security/bin/hass-security-collector-metrics run
 ```
 
