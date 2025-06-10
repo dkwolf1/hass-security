@@ -22,14 +22,14 @@ See [/docs/TROUBLESHOOTING_DEVICE_COLLECTOR.md](docs/TROUBLESHOOTING_DEVICE_COLL
 
 ```
 docker run -it --rm -p 8080:8080 \
--v `pwd`/config:/opt/scrutiny/config \
+-v `pwd`/config:/opt/hass-security/config \
 -v /run/udev:/run/udev:ro \
 --cap-add SYS_RAWIO \
 --device=/dev/sda \
 --device=/dev/sdb \
 -e DEBUG=true \
--e COLLECTOR_LOG_FILE=/opt/scrutiny/config/collector.log \
--e SCRUTINY_LOG_FILE=/opt/scrutiny/config/web.log \
+-e COLLECTOR_LOG_FILE=/opt/hass-security/config/collector.log \
+-e SCRUTINY_LOG_FILE=/opt/hass-security/config/web.log \
 --name scrutiny \
 ghcr.io/analogj/scrutiny:master-omnibus
 

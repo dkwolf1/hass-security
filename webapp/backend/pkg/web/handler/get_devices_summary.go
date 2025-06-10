@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database"
 	"github.com/gin-gonic/gin"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database"
 	"github.com/sirupsen/logrus"
 	"net/http"
 )

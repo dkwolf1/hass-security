@@ -1,10 +1,10 @@
 # Testers
 
-Scrutiny supports many operating systems, CPU architectures and runtime environments. Unfortunately that makes it incredibly
+Hass-Security supports many operating systems, CPU architectures and runtime environments. Unfortunately that makes it incredibly
 difficult to test. 
-Thankfully the following users have been gracious enough to test/validate Scrutiny works on their system.
+Thankfully the following users have been gracious enough to test/validate Hass-Security works on their system.
 
-> NOTE: If you're interested in volunteering to test Scrutiny beta builds on your system, please [open an issue](https://github.com/AnalogJ/scrutiny/issues). 
+> NOTE: If you're interested in volunteering to test Hass-Security beta builds on your system, please [open an issue](https://github.com/hass-security/hass-security/issues). 
 
 | Architecture Name | Binaries | Docker |
 | --- | --- | --- |

@@ -1,22 +1,22 @@
 <p align="center">
-  <a href="https://github.com/AnalogJ/scrutiny">
-  <img width="300" alt="scrutiny_view" src="webapp/frontend/src/assets/images/logo/scrutiny-logo-dark.png">
+  <a href="https://github.com/hass-security/hass-security">
+  <img width="300" alt="hass-security_view" src="webapp/frontend/src/assets/images/logo/scrutiny-logo-dark.png">
   </a>
 </p>
 
 
-# scrutiny
+# hass-security
 
-[![CI](https://github.com/AnalogJ/scrutiny/workflows/CI/badge.svg?branch=master)](https://github.com/AnalogJ/scrutiny/actions?query=workflow%3ACI)
-[![codecov](https://codecov.io/gh/AnalogJ/scrutiny/branch/master/graph/badge.svg)](https://codecov.io/gh/AnalogJ/scrutiny)
-[![GitHub license](https://img.shields.io/github/license/AnalogJ/scrutiny.svg?style=flat-square)](https://github.com/AnalogJ/scrutiny/blob/master/LICENSE)
-[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/analogj/scrutiny)
-[![Go Report Card](https://goreportcard.com/badge/github.com/AnalogJ/scrutiny?style=flat-square)](https://goreportcard.com/report/github.com/AnalogJ/scrutiny)
-[![GitHub release](http://img.shields.io/github/release/AnalogJ/scrutiny.svg?style=flat-square)](https://github.com/AnalogJ/scrutiny/releases)
+[![CI](https://github.com/hass-security/hass-security/workflows/CI/badge.svg?branch=master)](https://github.com/hass-security/hass-security/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/hass-security/hass-security/branch/master/graph/badge.svg)](https://codecov.io/gh/hass-security/hass-security)
+[![GitHub license](https://img.shields.io/github/license/hass-security/hass-security.svg?style=flat-square)](https://github.com/hass-security/hass-security/blob/master/LICENSE)
+[![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/hass-security/hass-security)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hass-security/hass-security?style=flat-square)](https://goreportcard.com/report/github.com/hass-security/hass-security)
+[![GitHub release](http://img.shields.io/github/release/hass-security/hass-security.svg?style=flat-square)](https://github.com/hass-security/hass-security/releases)
 
 WebUI for smartd S.M.A.R.T monitoring
 
-> NOTE: Scrutiny is a Work-in-Progress and still has some rough edges.
+> NOTE: Hass-Security is a Work-in-Progress and still has some rough edges.
 
 [![](docs/dashboard.png)](https://imgur.com/a/5k8qMzS)
 
@@ -33,11 +33,11 @@ These S.M.A.R.T hard drive self-tests can help you detect and replace failing ha
 - S.M.A.R.T attribute thresholds are set by the manufacturer. In some cases these thresholds are unset, or are so high that they can only be used to confirm a failed drive, rather than detecting a drive about to fail.
 - `smartd` is a command line only tool. For head-less servers a web UI would be more valuable.
 
-**Scrutiny is a Hard Drive Health Dashboard & Monitoring solution, merging manufacturer provided S.M.A.R.T metrics with real-world failure rates.**
+**Hass-Security is a Hard Drive Health Dashboard & Monitoring solution, merging manufacturer provided S.M.A.R.T metrics with real-world failure rates.**
 
 # Features
 
-Scrutiny is a simple but focused application, with a couple of core features:
+Hass-Security is a simple but focused application, with a couple of core features:
 
 - Web UI Dashboard - focused on Critical metrics
 - `smartd` integration (no re-inventing the wheel)
@@ -53,12 +53,12 @@ Scrutiny is a simple but focused application, with a couple of core features:
 
 ## RAID/Virtual Drives
 
-Scrutiny uses `smartctl --scan` to detect devices/drives.
+Hass-Security uses `smartctl --scan` to detect devices/drives.
 
-- All RAID controllers supported by `smartctl` are automatically supported by Scrutiny.
+- All RAID controllers supported by `smartctl` are automatically supported by Hass-Security.
     - While some RAID controllers support passing through the underlying SMART data to `smartctl` others do not.
-    - In some cases `--scan` does not correctly detect the device type, returning [incomplete SMART data](https://github.com/AnalogJ/scrutiny/issues/45).
-    Scrutiny supports overriding detected device type via the config file: see [example.collector.yaml](https://github.com/AnalogJ/scrutiny/blob/master/example.collector.yaml)
+    - In some cases `--scan` does not correctly detect the device type, returning [incomplete SMART data](https://github.com/hass-security/hass-security/issues/45).
+    Hass-Security supports overriding detected device type via the config file: see [example.collector.yaml](https://github.com/hass-security/hass-security/blob/master/example.collector.yaml)
 - If you use docker, you **must** pass though the RAID virtual disk to the container using `--device` (see below)
     - This device may be in `/dev/*` or `/dev/bus/*`.
     - If you're unsure, run `smartctl --scan` on your host, and pass all listed devices to the container.
@@ -69,49 +69,49 @@ See [docs/TROUBLESHOOTING_DEVICE_COLLECTOR.md](./docs/TROUBLESHOOTING_DEVICE_COL
 
 If you're using Docker, getting started is as simple as running the following command:
 
-> See [docker/example.omnibus.docker-compose.yml](https://github.com/AnalogJ/scrutiny/blob/master/docker/example.omnibus.docker-compose.yml) for a docker-compose file.
+> See [docker/example.omnibus.docker-compose.yml](https://github.com/hass-security/hass-security/blob/master/docker/example.omnibus.docker-compose.yml) for a docker-compose file.
 
 ```bash
 docker run -it --rm -p 8080:8080 -p 8086:8086 \
-  -v `pwd`/scrutiny:/opt/scrutiny/config \
-  -v `pwd`/influxdb2:/opt/scrutiny/influxdb \
+  -v `pwd`/hass-security:/opt/hass-security/config \
+  -v `pwd`/influxdb2:/opt/hass-security/influxdb \
   -v /run/udev:/run/udev:ro \
   --cap-add SYS_RAWIO \
   --device=/dev/sda \
   --device=/dev/sdb \
-  --name scrutiny \
-  ghcr.io/analogj/scrutiny:master-omnibus
+  --name hass-security \
+  ghcr.io/analogj/hass-security:master-omnibus
 ```
 
-- `/run/udev` is necessary to provide the Scrutiny collector with access to your device metadata
+- `/run/udev` is necessary to provide the Hass-Security collector with access to your device metadata
 - `--cap-add SYS_RAWIO` is necessary to allow `smartctl` permission to query your device SMART data
-    - NOTE: If you have **NVMe** drives, you must add `--cap-add SYS_ADMIN` as well. See issue [#26](https://github.com/AnalogJ/scrutiny/issues/26#issuecomment-696817130)
+    - NOTE: If you have **NVMe** drives, you must add `--cap-add SYS_ADMIN` as well. See issue [#26](https://github.com/hass-security/hass-security/issues/26#issuecomment-696817130)
 - `--device` entries are required to ensure that your hard disk devices are accessible within the container.
-- `ghcr.io/analogj/scrutiny:master-omnibus` is a omnibus image, containing both the webapp server (frontend & api) as well as the S.M.A.R.T metric collector. (see below)
+- `ghcr.io/analogj/hass-security:master-omnibus` is a omnibus image, containing both the webapp server (frontend & api) as well as the S.M.A.R.T metric collector. (see below)
 
 ### Hub/Spoke Deployment
 
 In addition to the Omnibus image (available under the `latest` tag) you can deploy in Hub/Spoke mode, which requires 3
 other Docker images:
 
-- `ghcr.io/analogj/scrutiny:master-collector` - Contains the Scrutiny data collector, `smartctl` binary and cron-like
+- `ghcr.io/analogj/hass-security:master-collector` - Contains the Hass-Security data collector, `smartctl` binary and cron-like
   scheduler. You can run one collector on each server.
-- `ghcr.io/analogj/scrutiny:master-web` - Contains the Web UI and API. Only one container necessary
+- `ghcr.io/analogj/hass-security:master-web` - Contains the Web UI and API. Only one container necessary
 - `influxdb:2.2` - InfluxDB image, used by the Web container to persist SMART data. Only one container necessary
   See [docs/TROUBLESHOOTING_INFLUXDB.md](./docs/TROUBLESHOOTING_INFLUXDB.md)
 
-> See [docker/example.hubspoke.docker-compose.yml](https://github.com/AnalogJ/scrutiny/blob/master/docker/example.hubspoke.docker-compose.yml) for a docker-compose file.
+> See [docker/example.hubspoke.docker-compose.yml](https://github.com/hass-security/hass-security/blob/master/docker/example.hubspoke.docker-compose.yml) for a docker-compose file.
 
 ```bash
 docker run --rm -p 8086:8086 \
   -v `pwd`/influxdb2:/var/lib/influxdb2 \
-  --name scrutiny-influxdb \
+  --name hass-security-influxdb \
   influxdb:2.2
 
 docker run --rm -p 8080:8080 \
-  -v `pwd`/scrutiny:/opt/scrutiny/config \
-  --name scrutiny-web \
-  ghcr.io/analogj/scrutiny:master-web
+  -v `pwd`/hass-security:/opt/hass-security/config \
+  --name hass-security-web \
+  ghcr.io/analogj/hass-security:master-web
 
 docker run --rm \
   -v /run/udev:/run/udev:ro \
@@ -119,13 +119,13 @@ docker run --rm \
   --device=/dev/sda \
   --device=/dev/sdb \
   -e COLLECTOR_API_ENDPOINT=http://SCRUTINY_WEB_IPADDRESS:8080 \
-  --name scrutiny-collector \
-  ghcr.io/analogj/scrutiny:master-collector
+  --name hass-security-collector \
+  ghcr.io/analogj/hass-security:master-collector
 ```
 
 ## Manual Installation (without-Docker)
 
-While the easiest way to get started with [Scrutiny is using Docker](https://github.com/AnalogJ/scrutiny#docker),
+While the easiest way to get started with [Hass-Security is using Docker](https://github.com/hass-security/hass-security#docker),
 it is possible to run it manually without much work. You can even mix and match, using Docker for one component and
 a manual installation for the other.
 
@@ -133,38 +133,38 @@ See [docs/INSTALL_MANUAL.md](docs/INSTALL_MANUAL.md) for instructions.
 
 ## Usage
 
-Once scrutiny is running, you can open your browser to `http://localhost:8080` and take a look at the dashboard.
+Once hass-security is running, you can open your browser to `http://localhost:8080` and take a look at the dashboard.
 
 If you're using the omnibus image, the collector should already have run, and your dashboard should be populate with every
-drive that Scrutiny detected. The collector is configured to run once a day, but you can trigger it manually by running the command below.
+drive that Hass-Security detected. The collector is configured to run once a day, but you can trigger it manually by running the command below.
 
 For users of the docker Hub/Spoke deployment or manual install: initially the dashboard will be empty.
 After the first collector run, you'll be greeted with a list of all your hard drives and their current smart status.
 
 ```bash
-docker exec scrutiny /opt/scrutiny/bin/scrutiny-collector-metrics run
+docker exec hass-security /opt/hass-security/bin/hass-security-collector-metrics run
 ```
 
 # Configuration
-By default Scrutiny looks for its YAML configuration files in `/opt/scrutiny/config`
+By default Hass-Security looks for its YAML configuration files in `/opt/hass-security/config`
 
 There are two configuration files available:
 
-- Webapp/API config via `scrutiny.yaml` - [example.scrutiny.yaml](example.scrutiny.yaml).
+- Webapp/API config via `hass-security.yaml` - [example.hass-security.yaml](example.hass-security.yaml).
 - Collector config via `collector.yaml` - [example.collector.yaml](example.collector.yaml).
 
-Neither file is required, however if provided, it allows you to configure how Scrutiny functions.
+Neither file is required, however if provided, it allows you to configure how Hass-Security functions.
 
 ## Cron Schedule
 Unfortunately the Cron schedule cannot be configured via the `collector.yaml` (as the collector binary needs to be trigged by a scheduler/cron).
-However, if you are using the official `ghcr.io/analogj/scrutiny:master-collector` or `ghcr.io/analogj/scrutiny:master-omnibus` docker images,
+However, if you are using the official `ghcr.io/analogj/hass-security:master-collector` or `ghcr.io/analogj/hass-security:master-omnibus` docker images,
 you can use the `COLLECTOR_CRON_SCHEDULE` environmental variable to override the default cron schedule (daily @ midnight - `0 0 * * *`).
 
 `docker run -e COLLECTOR_CRON_SCHEDULE="0 0 * * *" ...`
 
 ## Notifications
 
-Scrutiny supports sending SMART device failure notifications via the following services:
+Hass-Security supports sending SMART device failure notifications via the following services:
 - Custom Script (data provided via environmental variables)
 - Email
 - Webhooks
@@ -182,7 +182,7 @@ Scrutiny supports sending SMART device failure notifications via the following s
 - Telegram
 - Tulip
 
-Check the `notify.urls` section of [example.scrutiny.yml](example.scrutiny.yaml) for examples.
+Check the `notify.urls` section of [example.hass-security.yml](example.hass-security.yaml) for examples.
 
 For more information and troubleshooting, see the [TROUBLESHOOTING_NOTIFICATIONS.md](./docs/TROUBLESHOOTING_NOTIFICATIONS.md) file
 
@@ -195,7 +195,7 @@ curl -X POST http://localhost:8080/api/health/notify
 ```
 
 # Debug mode & Log Files
-Scrutiny provides various methods to change the log level to debug and generate log files.
+Hass-Security provides various methods to change the log level to debug and generate log files.
 
 ## Web Server/API
 
@@ -217,7 +217,7 @@ log:
 Or if you're not using docker, you can pass CLI arguments to the web server during startup:
 
 ```bash
-scrutiny start --debug --log-file /tmp/web.log
+hass-security start --debug --log-file /tmp/web.log
 ```
 
 ## Collector
@@ -232,7 +232,7 @@ COLLECTOR_LOG_FILE=/tmp/collector.log
 Or if you're not using docker, you can pass CLI arguments to the collector during startup:
 
 ```bash
-scrutiny-collector-metrics run --debug --log-file /tmp/collector.log
+hass-security-collector-metrics run --debug --log-file /tmp/collector.log
 ```
 
 # Supported Architectures
@@ -242,22 +242,22 @@ scrutiny-collector-metrics run --debug --log-file /tmp/collector.log
 | linux-amd64 | :white_check_mark: | :white_check_mark: |
 | linux-arm-5 | :white_check_mark: |  |
 | linux-arm-6 | :white_check_mark: |  |
-| linux-arm-7 | :white_check_mark: | web/collector only. see [#236](https://github.com/AnalogJ/scrutiny/issues/236)  |
+| linux-arm-7 | :white_check_mark: | web/collector only. see [#236](https://github.com/hass-security/hass-security/issues/236)  |
 | linux-arm64 | :white_check_mark: | :white_check_mark: |
 | freebsd-amd64 | :white_check_mark: |  |
 | macos-amd64 | :white_check_mark: | :white_check_mark: |
 | macos-arm64 | :white_check_mark: | :white_check_mark: |
-| windows-amd64 | :white_check_mark: | WIP, see [#15](https://github.com/AnalogJ/scrutiny/issues/15) |
+| windows-amd64 | :white_check_mark: | WIP, see [#15](https://github.com/hass-security/hass-security/issues/15) |
 | windows-arm64 | :white_check_mark: |  |
 
 
 # Contributing
 
-Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for instructions for how to develop and contribute to the scrutiny codebase.
+Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for instructions for how to develop and contribute to the hass-security codebase.
 
 Work your magic and then submit a pull request. We love pull requests!
 
-If you find the documentation lacking, help us out and update this README.md. If you don't have the time to work on Scrutiny, but found something we should know about, please submit an issue.
+If you find the documentation lacking, help us out and update this README.md. If you don't have the time to work on Hass-Security, but found something we should know about, please submit an issue.
 
 # Versioning
 
@@ -274,11 +274,11 @@ Jason Kulatunga - Initial Development - @AnalogJ
 
 # Sponsors
 
-Scrutiny is only possible with the help of my [Github Sponsors](https://github.com/sponsors/AnalogJ/).
+Hass-Security is only possible with the help of my [Github Sponsors](https://github.com/sponsors/AnalogJ/).
 
 [![](docs/sponsors.png)](https://github.com/sponsors/AnalogJ/)
 
 They read a simple [reddit announcement post](https://github.com/sponsors/AnalogJ/) and decided to trust & finance
  a developer they've never met. It's an exciting and incredibly humbling experience.
 
-If you found Scrutiny valuable, please consider [supporting my work](https://github.com/sponsors/AnalogJ/)
+If you found Hass-Security valuable, please consider [supporting my work](https://github.com/sponsors/AnalogJ/)

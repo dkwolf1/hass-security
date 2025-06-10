@@ -7,17 +7,17 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database/migrations/m20201107210306"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database/migrations/m20220503120000"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database/migrations/m20220509170100"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database/migrations/m20220716214900"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/database/migrations/m20250221084400"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/collector"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
 	_ "github.com/glebarez/sqlite"
 	"github.com/go-gormigrate/gormigrate/v2"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database/migrations/m20201107210306"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database/migrations/m20220503120000"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database/migrations/m20220509170100"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database/migrations/m20220716214900"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/database/migrations/m20250221084400"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/collector"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 	"github.com/influxdata/influxdb-client-go/v2/api/http"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -412,7 +412,7 @@ func (sr *scrutinyRepository) Migrate(ctx context.Context) error {
 	})
 
 	if err := m.Migrate(); err != nil {
-		sr.logger.Errorf("Database migration failed with error. \n Please open a github issue at https://github.com/AnalogJ/scrutiny and attach a copy of your scrutiny.db file. \n %v", err)
+		sr.logger.Errorf("Database migration failed with error. \n Please open a github issue at https://github.com/hass-security/hass-security and attach a copy of your scrutiny.db file. \n %v", err)
 		return err
 	}
 	sr.logger.Infoln("Database migration completed successfully")
@@ -435,7 +435,7 @@ func (sr *scrutinyRepository) Migrate(ctx context.Context) error {
 	})
 
 	if err := gm.Migrate(); err != nil {
-		sr.logger.Errorf("SQLite global configuration migrations failed with error. \n Please open a github issue at https://github.com/AnalogJ/scrutiny and attach a copy of your scrutiny.db file. \n %v", err)
+		sr.logger.Errorf("SQLite global configuration migrations failed with error. \n Please open a github issue at https://github.com/hass-security/hass-security and attach a copy of your scrutiny.db file. \n %v", err)
 		return err
 	}
 	sr.logger.Infoln("SQLite global configuration migrations completed successfully")

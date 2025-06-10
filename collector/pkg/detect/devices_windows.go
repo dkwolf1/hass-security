@@ -1,8 +1,8 @@
 package detect
 
 import (
-	"github.com/analogj/scrutiny/collector/pkg/common/shell"
-	"github.com/analogj/scrutiny/collector/pkg/models"
+	"github.com/hass-security/hass-security/collector/pkg/common/shell"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"strings"
 )
 
@@ -26,7 +26,7 @@ func (d *Detect) Start() ([]models.Device, error) {
 	return detectedDevices, nil
 }
 
-//WWN values NVMe and SCSI
+// WWN values NVMe and SCSI
 func (d *Detect) wwnFallback(detectedDevice *models.Device) {
 
 	//fallback to serial number

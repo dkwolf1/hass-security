@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/analogj/scrutiny/webapp/backend/pkg/config"
 	"github.com/gin-gonic/gin"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/config"
 )
 
 func ConfigMiddleware(appConfig config.Interface) gin.HandlerFunc {

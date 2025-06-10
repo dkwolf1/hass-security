@@ -1,13 +1,13 @@
 # Ansible Install
 
-[Zorlin](https://github.com/Zorlin) has developed and now maintains [an Ansible playbook](https://github.com/Zorlin/scrutiny-playbook) which automates the steps involved in manually setting up Scrutiny.
+[Zorlin](https://github.com/Zorlin) has developed and now maintains [an Ansible playbook](https://github.com/Zorlin/hass-security-playbook) which automates the steps involved in manually setting up Hass-Security.
 
 Using it is simple:
 
 * Grab a copy of the playbook
 * Follow the directions in the playbook repository
 * Run `ansible-playbook site.yml`
-* Visit http://your-machine:8080 to see your new Scrutiny installation.
+* Visit http://your-machine:8080 to see your new Hass-Security installation.
 
 It will automatically pull metrics from machines once a day, at 1am.
 

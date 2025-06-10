@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 	"github.com/analogj/go-util/utils"
-	"github.com/analogj/scrutiny/collector/pkg/errors"
-	"github.com/analogj/scrutiny/collector/pkg/models"
+	"github.com/hass-security/hass-security/collector/pkg/errors"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 	"log"
@@ -20,7 +20,7 @@ import (
 type configuration struct {
 	*viper.Viper
 
-	deviceOverrides    []models.ScanOverride
+	deviceOverrides []models.ScanOverride
 }
 
 //Viper uses the following precedence order. Each item takes precedence over the item below it:
@@ -53,7 +53,7 @@ func (c *configuration) Init() error {
 	c.SetEnvPrefix("COLLECTOR")
 	c.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
 	c.AutomaticEnv()
-	
+
 	//c.SetDefault("collect.short.command", "-a -o on -S on")
 
 	c.SetDefault("allow_listed_devices", []string{})

@@ -27,25 +27,25 @@ This will allow you to install a newer version of smartmontools on your Synology
 **4. We will now create the directories.**
 
 ```
-mkdir -p /volume1/\@Entware/scrutiny/bin
-mkdir -p /volume1/\@Entware/scrutiny/conf
+mkdir -p /volume1/\@Entware/hass-security/bin
+mkdir -p /volume1/\@Entware/hass-security/conf
 ```
 
 **5. change into the bin directory**
 
-`cd /volume1/\@Entware/scrutiny/bin`
+`cd /volume1/\@Entware/hass-security/bin`
 
 **6. Download the collector binary for your architecture and make it executable**
 
-`wget https://github.com/AnalogJ/scrutiny/releases/download/v0.4.12/scrutiny-collector-metrics-linux-arm64`
+`wget https://github.com/hass-security/hass-security/releases/download/v0.4.12/hass-security-collector-metrics-linux-arm64`
 
-`chmod +x /volume1/\@Entware/scrutiny/bin/scrutiny-collector-metrics-linux-arm64`
+`chmod +x /volume1/\@Entware/hass-security/bin/hass-security-collector-metrics-linux-arm64`
 
 **7. Create a config file for the collector**
 
 ```
-cd /volume1/\@Entware/scrutiny/conf
-wget https://raw.githubusercontent.com/AnalogJ/scrutiny/master/example.collector.yaml
+cd /volume1/\@Entware/hass-security/conf
+wget https://raw.githubusercontent.com/hass-security/hass-security/master/example.collector.yaml
 mv example.collector.yaml collector.yaml
 ```
 
@@ -74,29 +74,29 @@ api:
 **9. Let's update the smartd db**
 
 ```
-cd /volume1/\@Entware/scrutiny/bin/
+cd /volume1/\@Entware/hass-security/bin/
 wget https://raw.githubusercontent.com/smartmontools/smartmontools/master/smartmontools/drivedb.h
 ```
 
 **10. I ran it like this but you can tweak to your liking, the most important part is the --drivedb, as this loads it into the aplication for future use**
 
-`smartctl -d sat --all /dev/sda  --drivedb=/volume1/\@Entware/scrutiny/bin/drivedb.h`
+`smartctl -d sat --all /dev/sda  --drivedb=/volume1/\@Entware/hass-security/bin/drivedb.h`
 
 **11. Now lets create a small bash script, this will be used for the scheduled task inside Synology**
 
-`vim /volume1/\@Entware/scrutiny/bin/run_collect.sh`
+`vim /volume1/\@Entware/hass-security/bin/run_collect.sh`
 
 **The contents are below, copy and paste them in**
 
 ```
 #!/bin/bash
 
-/volume1/\@Entware/scrutiny/bin/scrutiny-collector-metrics-linux-arm64 run --config /volume1/\@Entware/scrutiny/conf/collector.yaml
+/volume1/\@Entware/hass-security/bin/hass-security-collector-metrics-linux-arm64 run --config /volume1/\@Entware/hass-security/conf/collector.yaml
 ```
 
 **Make `run_collect.sh` executable**
 
-`chmod +x /volume1/\@Entware/scrutiny/bin/run_collect.sh`
+`chmod +x /volume1/\@Entware/hass-security/bin/run_collect.sh`
 
 ## Set up Synology to run a scheduled task. 
 
@@ -109,7 +109,7 @@ Create > Scheduled Task > User Defined Script
 ###### General
 
 ```
-Task: Scrutiny_Collector
+Task: Hass-Security_Collector
 User: root
 Enabled: yes
 ```
@@ -129,7 +129,7 @@ Frequency: <Your desired frequency>
 **Run Command**
 
 ```
-. /opt/etc/profile; /volume1/\@Entware/scrutiny/bin/run_collect.sh
+. /opt/etc/profile; /volume1/\@Entware/hass-security/bin/run_collect.sh
 ```
 
 

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/analogj/scrutiny/webapp/backend/pkg"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/thresholds"
+	"github.com/hass-security/hass-security/webapp/backend/pkg"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/thresholds"
 )
 
 type SmartNvmeAttribute struct {
@@ -67,7 +67,7 @@ func (sa *SmartNvmeAttribute) Inflate(key string, val interface{}) {
 	}
 }
 
-//populate attribute status, using SMART Thresholds & Observed Metadata
+// populate attribute status, using SMART Thresholds & Observed Metadata
 // Chainable
 func (sa *SmartNvmeAttribute) PopulateAttributeStatus() *SmartNvmeAttribute {
 

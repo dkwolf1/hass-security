@@ -7,8 +7,8 @@ package mock_config
 import (
 	reflect "reflect"
 
-	config "github.com/analogj/scrutiny/webapp/backend/pkg/config"
 	gomock "github.com/golang/mock/gomock"
+	config "github.com/hass-security/hass-security/webapp/backend/pkg/config"
 	viper "github.com/spf13/viper"
 )
 

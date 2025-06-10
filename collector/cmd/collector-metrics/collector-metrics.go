@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/analogj/scrutiny/collector/pkg/collector"
-	"github.com/analogj/scrutiny/collector/pkg/config"
-	"github.com/analogj/scrutiny/collector/pkg/errors"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/version"
+	"github.com/hass-security/hass-security/collector/pkg/collector"
+	"github.com/hass-security/hass-security/collector/pkg/config"
+	"github.com/hass-security/hass-security/collector/pkg/errors"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/version"
 	"github.com/sirupsen/logrus"
 	"io"
 	"log"
@@ -30,15 +30,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	configFilePath := "/opt/scrutiny/config/collector.yaml"
-	configFilePathAlternative := "/opt/scrutiny/config/collector.yml"
+	configFilePath := "/opt/hass-security/config/collector.yaml"
+	configFilePathAlternative := "/opt/hass-security/config/collector.yml"
 	if !utils.FileExists(configFilePath) && utils.FileExists(configFilePathAlternative) {
 		configFilePath = configFilePathAlternative
 	}
 
 	//we're going to load the config file manually, since we need to validate it.
-	err = config.ReadConfig(configFilePath) // Find and read the config file
-	if _, ok := err.(errors.ConfigFileMissingError); ok {          // Handle errors reading the config file
+	err = config.ReadConfig(configFilePath)               // Find and read the config file
+	if _, ok := err.(errors.ConfigFileMissingError); ok { // Handle errors reading the config file
 		//ignore "could not find config file"
 	} else if err != nil {
 		os.Exit(1)
@@ -70,7 +70,7 @@ OPTIONS:
 		},
 		Before: func(c *cli.Context) error {
 
-			collectorMetrics := "AnalogJ/scrutiny/metrics"
+			collectorMetrics := "hass-security/hass-security/metrics"
 
 			var versionInfo string
 			if len(goos) > 0 && len(goarch) > 0 {

@@ -11,7 +11,7 @@ Depending on the functionality you are adding, you may need to setup a developme
 
 1. install the [Go runtime](https://go.dev/doc/install) (v1.20+)
 2. download the `scrutiny-web-frontend.tar.gz` for
-   the [latest release](https://github.com/AnalogJ/scrutiny/releases/latest). Extract to a folder named `dist`
+   the [latest release](https://github.com/hass-security/hass-security/releases/latest). Extract to a folder named `dist`
 3. create a `scrutiny.yaml` config file
     ```yaml
     # config file for local development. store as scrutiny.yaml
@@ -168,7 +168,7 @@ docker run -it --rm -p 8080:8080 \
 --device=/dev/sda \
 --device=/dev/sdb \
 ghcr.io/analogj/scrutiny:master-omnibus
-/opt/scrutiny/bin/scrutiny-collector-metrics run
+/opt/hass-security/bin/scrutiny-collector-metrics run
 ```
 
 

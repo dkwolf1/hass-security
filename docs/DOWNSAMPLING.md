@@ -1,6 +1,6 @@
 # Downsampling
 
-Scrutiny collects alot of data, that can cause the database to grow unbounded. 
+Hass-Security collects alot of data, that can cause the database to grow unbounded. 
 
 - Smart data
 - Smart test data
@@ -11,7 +11,7 @@ Scrutiny collects alot of data, that can cause the database to grow unbounded.
 This data must be accurate in the short term, and is useful for doing trend analysis in the long term.
 However, for trend analysis we only need aggregate data, individual data points are not as useful.
 
-Scrutiny will automatically downsample data on a schedule to ensure that the database size stays reasonable, while still
+Hass-Security will automatically downsample data on a schedule to ensure that the database size stays reasonable, while still
 ensuring historical data is present for comparisons.
 
 

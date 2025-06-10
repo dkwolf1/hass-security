@@ -5,9 +5,9 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/config"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models"
 	"github.com/glebarez/sqlite"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/config"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/influxdata/influxdb-client-go/v2/domain"
@@ -238,7 +238,7 @@ func InfluxSetupComplete(influxEndpoint string, tlsConfig *tls.Config) (bool, er
 		return false, err
 	}
 
-    client := &http.Client{Transport: &http.Transport{TLSClientConfig: tlsConfig}}
+	client := &http.Client{Transport: &http.Transport{TLSClientConfig: tlsConfig}}
 	res, err := client.Get(influxUri.String())
 	if err != nil {
 		return false, err

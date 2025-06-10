@@ -1,6 +1,6 @@
 package measurements
 
-import "github.com/analogj/scrutiny/webapp/backend/pkg"
+import "github.com/hass-security/hass-security/webapp/backend/pkg"
 
 type SmartAttribute interface {
 	Flatten() (fields map[string]interface{})

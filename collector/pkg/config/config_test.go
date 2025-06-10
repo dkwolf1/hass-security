@@ -1,8 +1,8 @@
 package config_test
 
 import (
-	"github.com/analogj/scrutiny/collector/pkg/config"
-	"github.com/analogj/scrutiny/collector/pkg/models"
+	"github.com/hass-security/hass-security/collector/pkg/config"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"github.com/stretchr/testify/require"
 	"path"
 	"testing"

@@ -5,10 +5,10 @@
 # Global Env Settings
 ########################################################################################################################
 
-GO_WORKSPACE ?= /go/src/github.com/analogj/scrutiny
+GO_WORKSPACE ?= /go/src/github.com/hass-security/hass-security
 
-COLLECTOR_BINARY_NAME = scrutiny-collector-metrics
-WEB_BINARY_NAME = scrutiny-web
+COLLECTOR_BINARY_NAME = hass-security-collector-metrics
+WEB_BINARY_NAME = hass-security-web
 LD_FLAGS =
 
 STATIC_TAGS =
@@ -120,14 +120,14 @@ binary-frontend-test-coverage:
 .PHONY: docker-collector
 docker-collector:
 	@echo "building collector docker image"
-	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile.collector -t analogj/scrutiny-dev:collector .
+	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile.collector -t analogj/hass-security-dev:collector .
 
 .PHONY: docker-web
 docker-web:
 	@echo "building web docker image"
-	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile.web -t analogj/scrutiny-dev:web .
+	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile.web -t analogj/hass-security-dev:web .
 
 .PHONY: docker-omnibus
 docker-omnibus:
 	@echo "building omnibus docker image"
-	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile -t analogj/scrutiny-dev:omnibus .
+	docker build $(DOCKER_TARGETARCH_BUILD_ARG) -f docker/Dockerfile -t analogj/hass-security-dev:omnibus .

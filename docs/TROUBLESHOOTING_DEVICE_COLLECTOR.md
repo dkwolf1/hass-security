@@ -1,11 +1,11 @@
-# Scrutiny <-> SmartMonTools 
+# Hass-Security <-> SmartMonTools 
 
-Scrutiny uses `smartctl --scan` to detect devices/drives. If your devices are not being detected by Scrutiny, or some 
+Hass-Security uses `smartctl --scan` to detect devices/drives. If your devices are not being detected by Hass-Security, or some 
 data is missing, this is probably due to a `smartctl` issue. 
-The following page will document commonly asked questions and troubleshooting steps for the Scrutiny S.M.A.R.T. data collector.
+The following page will document commonly asked questions and troubleshooting steps for the Hass-Security S.M.A.R.T. data collector.
 
 ## WWN vs Device name
-As discussed in [`#117`](https://github.com/AnalogJ/scrutiny/issues/117), `/dev/sd*` device paths are ephemeral. 
+As discussed in [`#117`](https://github.com/hass-security/hass-security/issues/117), `/dev/sd*` device paths are ephemeral. 
 
 > Device paths in Linux aren't guaranteed to be consistent across restarts. Device names consist of major numbers (letters) and minor numbers. When the Linux storage device driver detects a new device, the driver assigns major and minor numbers from the available range to the device. When a device is removed, the device numbers are freed for reuse.
 >
@@ -13,17 +13,17 @@ As discussed in [`#117`](https://github.com/AnalogJ/scrutiny/issues/117), `/dev/
 >
 > https://docs.microsoft.com/en-us/troubleshoot/azure/virtual-machines/troubleshoot-device-names-problems
 
-While the Docker Scrutiny collector does require devices to attached to the docker container by device name (using `--device=/dev/sd..`), internally 
-Scrutiny stores and references the devices by their `WWN` which is globally unique, and never changes. 
+While the Docker Hass-Security collector does require devices to attached to the docker container by device name (using `--device=/dev/sd..`), internally 
+Hass-Security stores and references the devices by their `WWN` which is globally unique, and never changes. 
 
-As such, passing devices to the Scrutiny collector container using `/dev/disk/by-id/`, `/dev/disk/by-label/`, `/dev/disk/by-path/` and `/dev/disk/by-uuid/`
+As such, passing devices to the Hass-Security collector container using `/dev/disk/by-id/`, `/dev/disk/by-label/`, `/dev/disk/by-path/` and `/dev/disk/by-uuid/`
 paths are unnecessary, unless you'd like to ensure the docker run command never needs to change.
 
 #### Force /dev/disk/by-id paths
 
-Since Scrutiny uses WWN under the hood, it really doesn't care about `/dev/sd*` vs `/dev/disk/by-id/`. The problem is the interaction between docker and smartmontools when using `--device /dev/disk/by-id` paths. 
+Since Hass-Security uses WWN under the hood, it really doesn't care about `/dev/sd*` vs `/dev/disk/by-id/`. The problem is the interaction between docker and smartmontools when using `--device /dev/disk/by-id` paths. 
 
-Basically Scrutiny offloads all device detection to smartmontools, which doesn't seem to detect devices that have been passed into the docker container using `/dev/disk/by-id` paths.
+Basically Hass-Security offloads all device detection to smartmontools, which doesn't seem to detect devices that have been passed into the docker container using `/dev/disk/by-id` paths.
 
 If you must use "static" device references, you can map the host device id/uuid/wwn references to device names within the container:
 
@@ -53,8 +53,8 @@ smartctl --scan
 /dev/sdd -d scsi # /dev/sdd, SCSI device
 ```
 
-Once you've verified that `smartctl` correctly detects your drives, make sure scrutiny is correctly detecting them as well.
-> NOTE: make sure you specify all the devices you'd like scrutiny to process using `--device=` flags.
+Once you've verified that `smartctl` correctly detects your drives, make sure hass-security is correctly detecting them as well.
+> NOTE: make sure you specify all the devices you'd like hass-security to process using `--device=` flags.
 
 ```bash
 docker run -it --rm \
@@ -62,33 +62,33 @@ docker run -it --rm \
   --cap-add SYS_RAWIO \
   --device=/dev/sda \
   --device=/dev/sdb \
-  ghcr.io/analogj/scrutiny:master-collector smartctl --scan
+  ghcr.io/analogj/hass-security:master-collector smartctl --scan
 ```
 
-If the output is the same, your devices will be processed by Scrutiny.
+If the output is the same, your devices will be processed by Hass-Security.
 
 ### Collector Config File
-In some cases `--scan` does not correctly detect the device type, returning [incomplete SMART data](https://github.com/AnalogJ/scrutiny/issues/45).
-Scrutiny will supports overriding the detected device type via the config file.
+In some cases `--scan` does not correctly detect the device type, returning [incomplete SMART data](https://github.com/hass-security/hass-security/issues/45).
+Hass-Security will supports overriding the detected device type via the config file.
 
-[example.collector.yaml](https://github.com/AnalogJ/scrutiny/blob/master/example.collector.yaml)
+[example.collector.yaml](https://github.com/hass-security/hass-security/blob/master/example.collector.yaml)
 
 ### RAID Controllers (Megaraid/3ware/HBA/Adaptec/HPE/etc)
 Smartctl has support for a large number of [RAID controllers](https://www.smartmontools.org/wiki/Supported_RAID-Controllers), however this 
-support is not automatic, and may require some additional device type hinting. You can provide this information to the Scrutiny collector
+support is not automatic, and may require some additional device type hinting. You can provide this information to the Hass-Security collector
 using a collector config file. See [example.collector.yaml](/example.collector.yaml)
 
 > NOTE: If you use docker, you **must** pass though the RAID virtual disk to the container using `--device` (see below)
 >
 > This device may be in `/dev/*` or `/dev/bus/*`.
-> If you do not see a virtual device file `/dev/bus/*` you may need to use the `--privileged` flag. See [#366 for more info](https://github.com/AnalogJ/scrutiny/issues/366#issuecomment-1253196407)
+> If you do not see a virtual device file `/dev/bus/*` you may need to use the `--privileged` flag. See [#366 for more info](https://github.com/hass-security/hass-security/issues/366#issuecomment-1253196407)
 >
 > If you're unsure, run `smartctl --scan` on your host, and pass all listed devices to the container.
 
 ```yaml
-# /opt/scrutiny/config/collector.yaml
+# /opt/hass-security/config/collector.yaml
 devices:
-  # Dell PERC/Broadcom Megaraid example: https://github.com/AnalogJ/scrutiny/issues/30
+  # Dell PERC/Broadcom Megaraid example: https://github.com/hass-security/hass-security/issues/30
   - device: /dev/bus/0
     type:
       - megaraid,14
@@ -107,13 +107,13 @@ devices:
       - 3ware,4
       - 3ware,5
   
-  # Adapec RAID: https://github.com/AnalogJ/scrutiny/issues/189
+  # Adapec RAID: https://github.com/hass-security/hass-security/issues/189
   - device: /dev/sdb
     type:
       - aacraid,0,0,0
       - aacraid,0,0,1
 
-  # HPE Smart Array example:  https://github.com/AnalogJ/scrutiny/issues/213
+  # HPE Smart Array example:  https://github.com/hass-security/hass-security/issues/213
   - device: /dev/sda
     type:
       - 'cciss,0'
@@ -125,10 +125,10 @@ devices:
 ### NVMe Drives
 
 As mentioned in the [README.md](/README.md), NVMe devices require both `--cap-add SYS_RAWIO` and `--cap-add SYS_ADMIN`
-to allow smartctl permission to query your NVMe device SMART data [#26](https://github.com/AnalogJ/scrutiny/issues/26)
+to allow smartctl permission to query your NVMe device SMART data [#26](https://github.com/hass-security/hass-security/issues/26)
 
 When attaching NVMe devices using `--device=/dev/nvme..`, make sure to provide the device controller (`/dev/nvme0`)
-instead of the block device (`/dev/nvme0n1`). See [#209](https://github.com/AnalogJ/scrutiny/issues/209).
+instead of the block device (`/dev/nvme0n1`). See [#209](https://github.com/hass-security/hass-security/issues/209).
 
 > The character device /dev/nvme0 is the NVME device controller, and block devices like /dev/nvme0n1 are the NVME storage namespaces: the devices you use for actual storage, which will behave essentially as disks.
 >
@@ -138,7 +138,7 @@ instead of the block device (`/dev/nvme0n1`). See [#209](https://github.com/Anal
 
 ### USB Devices
 
-The following information is extracted from [#266](https://github.com/AnalogJ/scrutiny/issues/266)
+The following information is extracted from [#266](https://github.com/hass-security/hass-security/issues/266)
 
 External HDDs support two modes of operation usb-storage (old, slower, stable) and uas (new, faster, sometimes unstable)
 . On some external HDDs, uas mode does not properly pass through SMART information, or even causes hardware issues, so
@@ -153,7 +153,7 @@ will incur some performance penalty, but may work well enough for you. More info
 ### Exit Codes
 
 If you see an error message similar to `smartctl returned an error code (2) while processing /dev/sda`, this means that
-`smartctl` (not Scrutiny) exited with an error code. Scrutiny will attempt to print a helpful error message to help you
+`smartctl` (not Hass-Security) exited with an error code. Hass-Security will attempt to print a helpful error message to help you
 debug, but you can look at the table (and associated links) below to debug `smartctl`.
 
 > smartctl Return Values
@@ -180,46 +180,46 @@ debug, but you can look at the table (and associated links) below to debug `smar
 
 Disks in Standby/Sleep can also cause `smartctl` to exit abnormally, usually with `exit code: 2`. 
 
-- https://github.com/AnalogJ/scrutiny/issues/221
-- https://github.com/AnalogJ/scrutiny/issues/157
+- https://github.com/hass-security/hass-security/issues/221
+- https://github.com/hass-security/hass-security/issues/157
 
 ### Volume Mount All Devices (`/dev`) - Privileged
 
-> WARNING: This is an insecure/dangerous workaround. Running Scrutiny (or any Docker image) with `--privileged` is equivalent to running it with root access. 
+> WARNING: This is an insecure/dangerous workaround. Running Hass-Security (or any Docker image) with `--privileged` is equivalent to running it with root access. 
 
 If you have exhausted all other mechanisms to get your disks working with `smartctl` running within a container, you can try running the docker image with the following additional flags:
 
-- `--privileged` (instead of `--cap-add`) - this gives the docker container full access to your system. Scrutiny does not require this permission, however it can be helpful for `smartctl`
+- `--privileged` (instead of `--cap-add`) - this gives the docker container full access to your system. Hass-Security does not require this permission, however it can be helpful for `smartctl`
 - `-v /dev:/dev:ro` (instead of `--device`) - this mounts the `/dev` folder (containing all your device files) into the container, allowing `smartctl` to see your disks, exactly as if it were running on your host directly. 
 
 With this workaround your `docker run` command would look similar to the following:
 
 ```bash
 docker run -it --rm -p 8080:8080 -p 8086:8086 \
-  -v `pwd`/scrutiny:/opt/scrutiny/config \
-  -v `pwd`/influxdb2:/opt/scrutiny/influxdb \
+  -v `pwd`/hass-security:/opt/hass-security/config \
+  -v `pwd`/influxdb2:/opt/hass-security/influxdb \
   -v /run/udev:/run/udev:ro \
   --privileged \
   -v /dev:/dev \
-  --name scrutiny \
-  ghcr.io/analogj/scrutiny:master-omnibus
+  --name hass-security \
+  ghcr.io/analogj/hass-security:master-omnibus
 ```
 
-## Scrutiny detects Failure but SMART Passed?
+## Hass-Security detects Failure but SMART Passed?
 
-There's 2 different mechanisms that Scrutiny uses to detect failures.
+There's 2 different mechanisms that Hass-Security uses to detect failures.
 
-The first is simple SMART failures. If SMART thinks an attribute is in a failed state, Scrutiny will display it as failed as well.
+The first is simple SMART failures. If SMART thinks an attribute is in a failed state, Hass-Security will display it as failed as well.
 
 The second is using BackBlaze failure data: [https://backblaze.com/blog-smart-stats-2014-8.html](https://backblaze.com/blog-smart-stats-2014-8.html) 
-If Scrutiny detects that an attribute corresponds with a high rate of failure using BackBlaze's data, it will also mark that attribute (and disk) as failed (even though SMART may think the device is still healthy).
+If Hass-Security detects that an attribute corresponds with a high rate of failure using BackBlaze's data, it will also mark that attribute (and disk) as failed (even though SMART may think the device is still healthy).
 
-This can cause some confusion when comparing Scrutiny's dashboard against other SMART analysis tools. 
-If you hover over the "failed" label beside an attribute, Scrutiny will tell you if the failure was due to SMART or Scrutiny/BackBlaze data. 
+This can cause some confusion when comparing Hass-Security's dashboard against other SMART analysis tools. 
+If you hover over the "failed" label beside an attribute, Hass-Security will tell you if the failure was due to SMART or Hass-Security/BackBlaze data. 
 
-### Device failed but Smart & Scrutiny passed
+### Device failed but Smart & Hass-Security passed
 
-Device SMART results are the source of truth for Scrutiny, however we don't just take into account the current SMART results, but also historical analysis of a disk.
+Device SMART results are the source of truth for Hass-Security, however we don't just take into account the current SMART results, but also historical analysis of a disk.
 This means that if a device is marked as failed at any point in its history, it will continue to be stored in the database as failed until the device is removed (or status is reset -- see below).
 
 In some cases, this historical failure may have been due to attribute analysis/thresholds that have since been relaxed:
@@ -232,14 +232,14 @@ In some cases, this historical failure may have been due to attribute analysis/t
 If you'd like to reset the status of a disk (to healthy) and allow the next run of the collector to determine the actual status, you can run the following command:
 
 ```bash
-# connect to scrutiny docker container
-docker exec -it scrutiny bash
+# connect to hass-security docker container
+docker exec -it hass-security bash
 
 # install sqlite CLI tools (inside container)
 apt update && apt install -y sqlite3
 
-# connect to the scrutiny database
-sqlite3 /opt/scrutiny/config/scrutiny.db
+# connect to the hass-security database
+sqlite3 /opt/hass-security/config/hass-security.db
 
 # reset/update the devices table, unset the failure status. 
 UPDATE devices SET device_status = null;
@@ -250,7 +250,7 @@ UPDATE devices SET device_status = null;
 
 ### Seagate Drives Failing
 
-As thoroughly discussed in [#255](https://github.com/AnalogJ/scrutiny/issues/255) and [#522](https://github.com/AnalogJ/scrutiny/issues/522), Seagate (Ironwolf & others) drives are almost always marked as failed by Scrutiny. 
+As thoroughly discussed in [#255](https://github.com/hass-security/hass-security/issues/255) and [#522](https://github.com/hass-security/hass-security/issues/522), Seagate (Ironwolf & others) drives are almost always marked as failed by Hass-Security. 
 
 #### Seek Error Rate & Read Error Rate (#255)
 > The `Seek Error Rate` & `Read Error Rate` attribute raw values are typically very high, and the 
@@ -263,13 +263,13 @@ As thoroughly discussed in [#255](https://github.com/AnalogJ/scrutiny/issues/255
 > 
 > http://www.users.on.net/~fzabkar/HDD/Seagate_SER_RRER_HEC.html
 
-Some analysis has been done which shows that Seagate drives break the common SMART conventions, which also causes Scrutiny's
+Some analysis has been done which shows that Seagate drives break the common SMART conventions, which also causes Hass-Security's
 comparison against BackBlaze data to detect these drives as failed. 
 
 **So what's the Solution?**
 
 After taking a look at the BackBlaze data for the relevant Attributes (`Seek Error Rate` & `Read Error Rate`), I've decided
-to disable Scrutiny analysis for them. Both are non-critical, and have low-correlation with failure.
+to disable Hass-Security analysis for them. Both are non-critical, and have low-correlation with failure.
 
 > Please note: SMART failures for these attributes will still cause the drive to be marked as failed. Only BackBlaze analysis has been disabled
 
@@ -277,7 +277,7 @@ If this is effecting your drives, you'll need to do the following:
 
 1. Upgrade to v0.4.13+
 2. Reset your drive status using the SQLite script
-   in [#device-failed-but-smart--scrutiny-passed](https://github.com/AnalogJ/scrutiny/blob/master/docs/TROUBLESHOOTING_DEVICE_COLLECTOR.md#device-failed-but-smart--scrutiny-passed)
+   in [#device-failed-but-smart--hass-security-passed](https://github.com/hass-security/hass-security/blob/master/docs/TROUBLESHOOTING_DEVICE_COLLECTOR.md#device-failed-but-smart--hass-security-passed)
 3. Wait for (or manually start) the collector.
 
 If you'd like to learn more about how the Seagate Ironwolf SMART attributes work under the hood, and how they differ
@@ -288,19 +288,19 @@ other drives, please read the following:
 - https://www.truenas.com/community/threads/seagate-ironwolf-smart-test-raw_read_error_rate-seek_error_rate.68634/
 
 #### Seagate Raw Values are incorrect (#522)
-Basically Seagate drives are known to use a custom data format for a number of their SMART attributes. This causes issues with Scrutiny's threshold analysis. 
+Basically Seagate drives are known to use a custom data format for a number of their SMART attributes. This causes issues with Hass-Security's threshold analysis. 
 
-- The workaround is to customize the smartctl command that Scrutiny uses for your drive by [creating a collector.yaml file](https://github.com/AnalogJ/scrutiny/issues/522#issuecomment-1766727988) and "fixing" each attribute
+- The workaround is to customize the smartctl command that Hass-Security uses for your drive by [creating a collector.yaml file](https://github.com/hass-security/hass-security/issues/522#issuecomment-1766727988) and "fixing" each attribute
 - The **real "fix"** is to make sure your Seagate drive is correctly supported by smartmontools. See this [PR](https://github.com/smartmontools/smartmontools/pull/247)
 
-Sorry for the bad news, but this is a known issue and there's just not much we can do on the Scrutiny side. 
+Sorry for the bad news, but this is a known issue and there's just not much we can do on the Hass-Security side. 
 
 
 ## Hub & Spoke model, with multiple Hosts.
 
 ![multiple-host-ids image](multiple-host-ids.png)
 
-When deploying Scrutiny in a hub & spoke model, it can be difficult to determine exactly which node a set of devices are
+When deploying Hass-Security in a hub & spoke model, it can be difficult to determine exactly which node a set of devices are
 associated with.
 Thankfully the collector has a special `--host-id` flag (or `COLLECTOR_HOST_ID` env variable) that can be used to
 associate devices with a friendly host name.
@@ -309,9 +309,9 @@ The host-id is passed from the collector to the web-api when SMART device data i
 the host-id:
 
 - using the collector config
-  file: [master/example.collector.yaml#L19-L22](https://github.com/AnalogJ/scrutiny/blob/master/example.collector.yaml?rgh-link-date=2022-05-25T15%3A08%3A56Z#L19-L22)
+  file: [master/example.collector.yaml#L19-L22](https://github.com/hass-security/hass-security/blob/master/example.collector.yaml?rgh-link-date=2022-05-25T15%3A08%3A56Z#L19-L22)
 - using the `--host-id` collector CLI
-  argument: [master/collector/cmd/collector-metrics/collector-metrics.go#L180-L185](https://github.com/AnalogJ/scrutiny/blob/master/collector/cmd/collector-metrics/collector-metrics.go?rgh-link-date=2022-05-25T15%3A08%3A56Z#L180-L185)
+  argument: [master/collector/cmd/collector-metrics/collector-metrics.go#L180-L185](https://github.com/hass-security/hass-security/blob/master/collector/cmd/collector-metrics/collector-metrics.go?rgh-link-date=2022-05-25T15%3A08%3A56Z#L180-L185)
 - using the `COLLECTOR_HOST_ID` environmental variable.
 
 See the [docs/INSTALL_HUB_SPOKE.md](/docs/INSTALL_HUB_SPOKE.md) guide for more information.
@@ -328,12 +328,12 @@ COLLECTOR_LOG_FILE=/tmp/collector.log
 Or if you're not using docker, you can pass CLI arguments to the collector during startup:
 
 ```bash
-scrutiny-collector-metrics run --debug --log-file /tmp/collector.log
+hass-security-collector-metrics run --debug --log-file /tmp/collector.log
 ```
 
 ## Collector trigger on startup
 
-When the `omnibus` docker image starts up, it will automatically trigger the collector, which will populate the Scrutiny
+When the `omnibus` docker image starts up, it will automatically trigger the collector, which will populate the Hass-Security
 Webui with your disks.
 This is not the case when running the collector docker image in **hub/spoke** mode, as the collector and webui are
 running in different containers (and potentially different host machines), so

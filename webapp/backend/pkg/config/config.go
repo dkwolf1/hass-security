@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/analogj/go-util/utils"
-	"github.com/analogj/scrutiny/webapp/backend/pkg/errors"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/errors"
 	"github.com/spf13/viper"
 	"log"
 	"os"
@@ -33,8 +33,8 @@ func (c *configuration) Init() error {
 	c.SetDefault("web.listen.port", "8080")
 	c.SetDefault("web.listen.host", "0.0.0.0")
 	c.SetDefault("web.listen.basepath", "")
-	c.SetDefault("web.src.frontend.path", "/opt/scrutiny/web")
-	c.SetDefault("web.database.location", "/opt/scrutiny/config/scrutiny.db")
+	c.SetDefault("web.src.frontend.path", "/opt/hass-security/web")
+	c.SetDefault("web.database.location", "/opt/hass-security/config/scrutiny.db")
 
 	c.SetDefault("log.level", "INFO")
 	c.SetDefault("log.file", "")

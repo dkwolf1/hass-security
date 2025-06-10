@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/analogj/scrutiny/collector/pkg/common/shell"
-	"github.com/analogj/scrutiny/collector/pkg/config"
-	"github.com/analogj/scrutiny/collector/pkg/detect"
-	"github.com/analogj/scrutiny/collector/pkg/errors"
-	"github.com/analogj/scrutiny/collector/pkg/models"
+	"github.com/hass-security/hass-security/collector/pkg/common/shell"
+	"github.com/hass-security/hass-security/collector/pkg/config"
+	"github.com/hass-security/hass-security/collector/pkg/detect"
+	"github.com/hass-security/hass-security/collector/pkg/errors"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"github.com/samber/lo"
 	"github.com/sirupsen/logrus"
 )

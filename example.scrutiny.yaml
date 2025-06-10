@@ -1,6 +1,6 @@
 # Commented Scrutiny Configuration File
 #
-# The default location for this file is /opt/scrutiny/config/scrutiny.yaml.
+# The default location for this file is /opt/hass-security/config/hass-security.yaml.
 # In some cases to improve clarity default values are specified,
 # uncommented. Other example values are commented out.
 #
@@ -13,7 +13,7 @@
 # Version
 #
 # version specifies the version of this configuration file schema, not
-# the scrutiny binary. There is only 1 version available at the moment
+# the hass-security binary. There is only 1 version available at the moment
 version: 1
 
 web:
@@ -21,19 +21,19 @@ web:
     port: 8080
     host: 0.0.0.0
 
-    # if you're using a reverse proxy like apache/nginx, you can override this value to serve scrutiny on a subpath.
-    # eg. http://example.com/scrutiny/* vs http://example.com:8080
+    # if you're using a reverse proxy like apache/nginx, you can override this value to serve hass-security on a subpath.
+    # eg. http://example.com/hass-security/* vs http://example.com:8080
     # see docs/TROUBLESHOOTING_REVERSE_PROXY.md
-    # basepath: `/scrutiny`
+    # basepath: `/hass-security`
     # leave empty unless behind a path prefixed proxy
     basepath: ''
   database:
     # can also set absolute path here
-    location: /opt/scrutiny/config/scrutiny.db
+    location: /opt/hass-security/config/hass-security.db
   src:
-    # the location on the filesystem where scrutiny javascript + css is located
+    # the location on the filesystem where hass-security javascript + css is located
     frontend:
-      path: /opt/scrutiny/web
+      path: /opt/hass-security/web
 
   # if you're running influxdb on a different host (or using a cloud-provider) you'll need to update the host & port below.
   # token, org, bucket are unnecessary for a new InfluxDB installation, as Scrutiny will automatically run the InfluxDB setup,

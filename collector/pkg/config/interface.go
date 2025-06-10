@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/analogj/scrutiny/collector/pkg/models"
+	"github.com/hass-security/hass-security/collector/pkg/models"
 	"github.com/spf13/viper"
 )
 

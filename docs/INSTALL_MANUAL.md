@@ -1,12 +1,12 @@
 # Manual Install
 
-While the easiest way to get started with [Scrutiny is using Docker](https://github.com/AnalogJ/scrutiny#docker),
+While the easiest way to get started with [Hass-Security is using Docker](https://github.com/hass-security/hass-security#docker),
 it is possible to run it manually without much work. You can even mix and match, using Docker for one component and
 a manual installation for the other. There's also [an installer](INSTALL_ANSIBLE.md) which automates this manual installation procedure.
 
-Scrutiny is made up of three components: an influxdb Database, a collector and a webapp/api. Here's how each component can be deployed manually.
+Hass-Security is made up of three components: an influxdb Database, a collector and a webapp/api. Here's how each component can be deployed manually.
 
-> Note: the `/opt/scrutiny` directory is not hardcoded, you can use any directory name/path.
+> Note: the `/opt/hass-security` directory is not hardcoded, you can use any directory name/path.
 
 ## InfluxDB
 
@@ -24,12 +24,12 @@ which is included by most linux OS's already.
 
 ### Directory Structure
 
-Now let's create a directory structure to contain the Scrutiny files & binary.
+Now let's create a directory structure to contain the Hass-Security files & binary.
 
 ```
-mkdir -p /opt/scrutiny/config
-mkdir -p /opt/scrutiny/web
-mkdir -p /opt/scrutiny/bin
+mkdir -p /opt/hass-security/config
+mkdir -p /opt/hass-security/web
+mkdir -p /opt/hass-security/bin
 ```
 
 ### Config file
@@ -38,22 +38,22 @@ While it is possible to run the webapp/api without a config file, the defaults a
 and so will need to be overridden. So the first thing you'll need to do is create a config file that looks like the following:
 
 ```
-# stored in /opt/scrutiny/config/scrutiny.yaml
+# stored in /opt/hass-security/config/hass-security.yaml
 
 version: 1
 
 web:
   database:
-    # The Scrutiny webapp will create a database for you, however the parent directory must exist.
-    location: /opt/scrutiny/config/scrutiny.db
+    # The Hass-Security webapp will create a database for you, however the parent directory must exist.
+    location: /opt/hass-security/config/hass-security.db
   src:
     frontend:
-      # The path to the Scrutiny frontend files (js, css, images) must be specified.
+      # The path to the Hass-Security frontend files (js, css, images) must be specified.
       # We'll populate it with files in the next section
-      path: /opt/scrutiny/web
+      path: /opt/hass-security/web
   
   # if you're runnning influxdb on a different host (or using a cloud-provider) you'll need to update the host & port below. 
-  # token, org, bucket are unnecessary for a new InfluxDB installation, as Scrutiny will automatically run the InfluxDB setup, 
+  # token, org, bucket are unnecessary for a new InfluxDB installation, as Hass-Security will automatically run the InfluxDB setup, 
   # and store the information in the config file. If you 're re-using an existing influxdb installation, you'll need to provide
   # the `token`
   influxdb:
@@ -64,40 +64,40 @@ web:
 #    bucket: 'bucket'
 ```
 
-> Note: for a full list of available configuration options, please check the [example.scrutiny.yaml](https://github.com/AnalogJ/scrutiny/blob/master/example.scrutiny.yaml) file.
+> Note: for a full list of available configuration options, please check the [example.hass-security.yaml](https://github.com/hass-security/hass-security/blob/master/example.hass-security.yaml) file.
 
 ### Download Files
 
-Next, we'll download the Scrutiny API binary and frontend files from the [latest Github release](https://github.com/analogj/scrutiny/releases).
+Next, we'll download the Hass-Security API binary and frontend files from the [latest Github release](https://github.com/hass-security/hass-security/releases).
 The files you need to download are named:
 
-- **scrutiny-web-linux-amd64** - save this file to `/opt/scrutiny/bin`
-- **scrutiny-web-frontend.tar.gz** - save this file to `/opt/scrutiny/web`
+- **hass-security-web-linux-amd64** - save this file to `/opt/hass-security/bin`
+- **hass-security-web-frontend.tar.gz** - save this file to `/opt/hass-security/web`
 
-### Prepare Scrutiny
+### Prepare Hass-Security
 
 Now that we have downloaded the required files, let's prepare the filesystem.
 
 ```
-# Let's make sure the Scrutiny webapp is executable.
-chmod +x /opt/scrutiny/bin/scrutiny-web-linux-amd64
+# Let's make sure the Hass-Security webapp is executable.
+chmod +x /opt/hass-security/bin/hass-security-web-linux-amd64
 
 # Next, lets extract the frontend files.
-# NOTE: after extraction, there **should not** be a `dist` subdirectory in `/opt/scrutiny/web` directory.
-cd /opt/scrutiny/web
-tar xvzf scrutiny-web-frontend.tar.gz --strip-components 1 -C .
+# NOTE: after extraction, there **should not** be a `dist` subdirectory in `/opt/hass-security/web` directory.
+cd /opt/hass-security/web
+tar xvzf hass-security-web-frontend.tar.gz --strip-components 1 -C .
 
 
 # Cleanup
-rm -rf scrutiny-web-frontend.tar.gz
+rm -rf hass-security-web-frontend.tar.gz
 ```
 
-### Start Scrutiny Webapp
+### Start Hass-Security Webapp
 
-Finally, we start the Scrutiny webapp:
+Finally, we start the Hass-Security webapp:
 
 ```
-/opt/scrutiny/bin/scrutiny-web-linux-amd64 start --config /opt/scrutiny/config/scrutiny.yaml
+/opt/hass-security/bin/hass-security-web-linux-amd64 start --config /opt/hass-security/config/hass-security.yaml
 ```
 
 The webapp listens for traffic on `http://0.0.0.0:8080` by default.
@@ -124,38 +124,38 @@ So you'll need to install the v7+ version using one of the following commands:
 
 ### Directory Structure
 
-Now let's create a directory structure to contain the Scrutiny collector binary.
+Now let's create a directory structure to contain the Hass-Security collector binary.
 
 ```
-mkdir -p /opt/scrutiny/bin
+mkdir -p /opt/hass-security/bin
 ```
 
 
 ### Download Files
 
-Next, we'll download the Scrutiny collector binary from the [latest Github release](https://github.com/analogj/scrutiny/releases).
+Next, we'll download the Hass-Security collector binary from the [latest Github release](https://github.com/hass-security/hass-security/releases).
 The file you need to download is named:
 
-- **scrutiny-collector-metrics-linux-amd64** - save this file to `/opt/scrutiny/bin`
+- **hass-security-collector-metrics-linux-amd64** - save this file to `/opt/hass-security/bin`
 
 
-### Prepare Scrutiny
+### Prepare Hass-Security
 
 Now that we have downloaded the required files, let's prepare the filesystem.
 
 ```
-# Let's make sure the Scrutiny collector is executable.
-chmod +x /opt/scrutiny/bin/scrutiny-collector-metrics-linux-amd64
+# Let's make sure the Hass-Security collector is executable.
+chmod +x /opt/hass-security/bin/hass-security-collector-metrics-linux-amd64
 ```
 
-### Start Scrutiny Collector, Populate Webapp
+### Start Hass-Security Collector, Populate Webapp
 
-Next, we will manually trigger the collector, to populate the Scrutiny dashboard:
+Next, we will manually trigger the collector, to populate the Hass-Security dashboard:
 
-> NOTE: if you need to pass a config file to the scrutiny collector, you can provide it using the `--config` flag.
+> NOTE: if you need to pass a config file to the hass-security collector, you can provide it using the `--config` flag.
 
 ```
-/opt/scrutiny/bin/scrutiny-collector-metrics-linux-amd64 run --api-endpoint "http://localhost:8080"
+/opt/hass-security/bin/hass-security-collector-metrics-linux-amd64 run --api-endpoint "http://localhost:8080"
 ```
 
 ### Schedule Collector with Cron
@@ -167,6 +167,6 @@ This may be different depending on your OS/environment, but it may look somethin
 # open crontab
 crontab -e
 
-# add a line for Scrutiny
-*/15 * * * * . /etc/profile; /opt/scrutiny/bin/scrutiny-collector-metrics-linux-amd64 run --api-endpoint "http://localhost:8080"
+# add a line for Hass-Security
+*/15 * * * * . /etc/profile; /opt/hass-security/bin/hass-security-collector-metrics-linux-amd64 run --api-endpoint "http://localhost:8080"
 ```

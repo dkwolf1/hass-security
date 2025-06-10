@@ -4,9 +4,9 @@ type Device struct {
 	WWN string `json:"wwn"`
 
 	DeviceName     string `json:"device_name"`
-	DeviceUUID	   string `json:"device_uuid"`
-	DeviceSerialID	   string `json:"device_serial_id"`
-	DeviceLabel	   string `json:"device_label"`
+	DeviceUUID     string `json:"device_uuid"`
+	DeviceSerialID string `json:"device_serial_id"`
+	DeviceLabel    string `json:"device_label"`
 
 	Manufacturer   string `json:"manufacturer"`
 	ModelName      string `json:"model_name"`

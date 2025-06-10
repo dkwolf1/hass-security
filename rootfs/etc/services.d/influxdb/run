@@ -1,13 +1,13 @@
 #!/command/with-contenv bash
 
-mkdir -p /opt/scrutiny/influxdb/
+mkdir -p /opt/hass-security/influxdb/
 
-if [ -f "/opt/scrutiny/influxdb/config.yaml" ]; then
+if [ -f "/opt/hass-security/influxdb/config.yaml" ]; then
     echo "influxdb config file already exists. skipping."
 else
-cat << 'EOF' > /opt/scrutiny/influxdb/config.yaml
-bolt-path: /opt/scrutiny/influxdb/influxd.bolt
-engine-path: /opt/scrutiny/influxdb/engine
+cat << 'EOF' > /opt/hass-security/influxdb/config.yaml
+bolt-path: /opt/hass-security/influxdb/influxd.bolt
+engine-path: /opt/hass-security/influxdb/engine
 http-bind-address: ":8086"
 reporting-disabled: true
 EOF

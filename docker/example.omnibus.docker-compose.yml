@@ -1,9 +1,9 @@
 version: '3.5'
 
 services:
-  scrutiny:
-    container_name: scrutiny
-    image: ghcr.io/analogj/scrutiny:master-omnibus
+  hass-security:
+    container_name: hass-security
+    image: ghcr.io/analogj/hass-security:master-omnibus
     cap_add:
       - SYS_RAWIO
     ports:
@@ -11,8 +11,8 @@ services:
       - "8086:8086" # influxDB admin
     volumes:
       - /run/udev:/run/udev:ro
-      - ./config:/opt/scrutiny/config
-      - ./influxdb:/opt/scrutiny/influxdb
+      - ./config:/opt/hass-security/config
+      - ./influxdb:/opt/hass-security/influxdb
     devices:
       - "/dev/sda"
       - "/dev/sdb"

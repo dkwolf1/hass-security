@@ -32,7 +32,7 @@ Table Device  {
 	Label  string
 	HostId string
 
-	// Data set by Scrutiny
+	// Data set by Hass-Security
 	DeviceStatus enum
 }
 

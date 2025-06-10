@@ -1,4 +1,4 @@
-module github.com/analogj/scrutiny
+module github.com/hass-security/hass-security
 
 go 1.20
 

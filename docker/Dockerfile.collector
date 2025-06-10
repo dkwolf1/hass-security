@@ -6,26 +6,26 @@
 ########
 FROM golang:1.20-bookworm as backendbuild
 
-WORKDIR /go/src/github.com/analogj/scrutiny
+WORKDIR /go/src/github.com/hass-security/hass-security
 
-COPY . /go/src/github.com/analogj/scrutiny
+COPY . /go/src/github.com/hass-security/hass-security
 
 RUN apt-get update && apt-get install -y file && rm -rf /var/lib/apt/lists/*
 RUN make binary-clean binary-collector
 
 ########
 FROM debian:bookworm-slim as runtime
-WORKDIR /opt/scrutiny
-ENV PATH="/opt/scrutiny/bin:${PATH}"
+WORKDIR /opt/hass-security
+ENV PATH="/opt/hass-security/bin:${PATH}"
 
 RUN apt-get update && apt-get install -y cron smartmontools ca-certificates tzdata && rm -rf /var/lib/apt/lists/* && update-ca-certificates
 
 COPY /docker/entrypoint-collector.sh /entrypoint-collector.sh
-COPY /rootfs/etc/cron.d/scrutiny /etc/cron.d/scrutiny
-COPY --from=backendbuild /go/src/github.com/analogj/scrutiny/scrutiny-collector-metrics /opt/scrutiny/bin/
-RUN chmod +x /opt/scrutiny/bin/scrutiny-collector-metrics && \
+COPY /rootfs/etc/cron.d/hass-security /etc/cron.d/hass-security
+COPY --from=backendbuild /go/src/github.com/hass-security/hass-security/hass-security-collector-metrics /opt/hass-security/bin/
+RUN chmod +x /opt/hass-security/bin/hass-security-collector-metrics && \
     chmod +x /entrypoint-collector.sh && \
-    chmod 0644 /etc/cron.d/scrutiny && \
+    chmod 0644 /etc/cron.d/hass-security && \
     rm -f /etc/cron.daily/apt /etc/cron.daily/dpkg /etc/cron.daily/passwd
 
 CMD ["/entrypoint-collector.sh"]

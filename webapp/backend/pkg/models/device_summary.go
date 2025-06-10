@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/analogj/scrutiny/webapp/backend/pkg/models/measurements"
+	"github.com/hass-security/hass-security/webapp/backend/pkg/models/measurements"
 	"time"
 )
 
