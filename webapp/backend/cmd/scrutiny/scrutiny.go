@@ -58,7 +58,7 @@ OPTIONS:
 `
 
 	app := &cli.App{
-		Name:     "scrutiny",
+		Name:     "hass-security",
 		Usage:    "WebUI for smartd S.M.A.R.T monitoring",
 		Version:  version.VERSION,
 		Compiled: time.Now(),
@@ -97,7 +97,7 @@ OPTIONS:
 		Commands: []*cli.Command{
 			{
 				Name:  "start",
-				Usage: "Start the scrutiny server",
+				Usage: "Start the hass-security server",
 				Action: func(c *cli.Context) error {
 					fmt.Fprintln(c.App.Writer, c.Command.Usage)
 					if c.IsSet("config") {

@@ -105,8 +105,8 @@ jobs:
         with:
           name: binaries.zip
           path: |
-            scrutiny-web-*
-            scrutiny-collector-metrics-*
+            hass-security-web-*
+            hass-security-collector-metrics-*
 
   release-publish:
     name: Publish Release
@@ -134,23 +134,23 @@ jobs:
         with:
           version_metadata_path: ${{ github.event.inputs.version_metadata_path }}
           upload_assets:
-            scrutiny-collector-metrics-darwin-amd64
-            scrutiny-collector-metrics-darwin-arm64
-            scrutiny-collector-metrics-freebsd-amd64
-            scrutiny-collector-metrics-linux-amd64
-            scrutiny-collector-metrics-linux-arm-5
-            scrutiny-collector-metrics-linux-arm-6
-            scrutiny-collector-metrics-linux-arm-7
-            scrutiny-collector-metrics-linux-arm64
-            scrutiny-collector-metrics-windows-amd64.exe
-            scrutiny-collector-metrics-windows-arm64.exe
-            scrutiny-web-darwin-amd64
-            scrutiny-web-darwin-arm64
-            scrutiny-web-freebsd-amd64
-            scrutiny-web-linux-amd64
-            scrutiny-web-linux-arm-5
-            scrutiny-web-linux-arm-6
-            scrutiny-web-linux-arm-7
-            scrutiny-web-linux-arm64
-            scrutiny-web-windows-amd64.exe
-            scrutiny-web-windows-arm64.exe
+            hass-security-collector-metrics-darwin-amd64
+            hass-security-collector-metrics-darwin-arm64
+            hass-security-collector-metrics-freebsd-amd64
+            hass-security-collector-metrics-linux-amd64
+            hass-security-collector-metrics-linux-arm-5
+            hass-security-collector-metrics-linux-arm-6
+            hass-security-collector-metrics-linux-arm-7
+            hass-security-collector-metrics-linux-arm64
+            hass-security-collector-metrics-windows-amd64.exe
+            hass-security-collector-metrics-windows-arm64.exe
+            hass-security-web-darwin-amd64
+            hass-security-web-darwin-arm64
+            hass-security-web-freebsd-amd64
+            hass-security-web-linux-amd64
+            hass-security-web-linux-arm-5
+            hass-security-web-linux-arm-6
+            hass-security-web-linux-arm-7
+            hass-security-web-linux-arm64
+            hass-security-web-windows-amd64.exe
+            hass-security-web-windows-arm64.exe

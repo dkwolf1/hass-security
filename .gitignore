@@ -57,9 +57,9 @@ fabric.properties
 scrutiny.db
 /dist/
 vendor
-/scrutiny
-/scrutiny-collector-metrics-*
-/scrutiny-web-*
+/hass-security
+/hass-security-collector-metrics-*
+/hass-security-web-*
 scrutiny-*.db
 scrutiny_test.db
 scrutiny.yaml

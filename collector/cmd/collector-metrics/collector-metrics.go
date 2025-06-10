@@ -58,8 +58,8 @@ OPTIONS:
 `
 
 	app := &cli.App{
-		Name:     "scrutiny-collector-metrics",
-		Usage:    "smartctl data collector for scrutiny",
+		Name:     "hass-security-collector-metrics",
+		Usage:    "smartctl data collector for hass-security",
 		Version:  version.VERSION,
 		Compiled: time.Now(),
 		Authors: []*cli.Author{
@@ -97,7 +97,7 @@ OPTIONS:
 		Commands: []*cli.Command{
 			{
 				Name:  "run",
-				Usage: "Run the scrutiny smartctl metrics collector",
+				Usage: "Run the hass-security smartctl metrics collector",
 				Action: func(c *cli.Context) error {
 					if c.IsSet("config") {
 						err = config.ReadConfig(c.String("config")) // Find and read the config file
@@ -121,7 +121,7 @@ OPTIONS:
 					}
 
 					if c.IsSet("api-endpoint") {
-						//if the user is providing an api-endpoint with a basepath (eg. http://localhost:8080/scrutiny),
+						//if the user is providing an api-endpoint with a basepath (eg. http://localhost:8080/hass-security),
 						//we need to ensure the basepath has a trailing slash, otherwise the url.Parse() path concatenation doesnt work.
 						apiEndpoint := strings.TrimSuffix(c.String("api-endpoint"), "/") + "/"
 						config.Set("api.endpoint", apiEndpoint)

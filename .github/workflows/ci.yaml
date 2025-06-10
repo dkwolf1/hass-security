@@ -110,5 +110,5 @@ jobs:
         with:
           name: binaries-${{ matrix.cfg.on }}-${{ matrix.cfg.goos }}-${{ matrix.cfg.goarch }}-${{ matrix.cfg.goarm || 'na' }}.zip
           path: |
-            scrutiny-web-*
-            scrutiny-collector-metrics-*
+            hass-security-web-*
+            hass-security-collector-metrics-*
