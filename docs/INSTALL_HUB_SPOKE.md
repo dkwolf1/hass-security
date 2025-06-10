@@ -79,7 +79,7 @@ services:
 
   hass-security:
     container_name: hass-security
-    image: ghcr.io/analogj/hass-security:master-web
+    image: ghcr.io/hass-security/hass-security:master-web
     ports:
       - 8080:8080
     volumes:
@@ -168,7 +168,7 @@ version: "3.4"
 services:
 
   collector:
-    image: 'ghcr.io/analogj/hass-security:master-collector'
+    image: 'ghcr.io/hass-security/hass-security:master-collector'
     cap_add:
       - SYS_RAWIO
     volumes:

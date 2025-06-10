@@ -80,7 +80,7 @@ You may also configure these values using the following environmental variables 
     services:
       hass-security:
         container_name: hass-security
-        image: ghcr.io/analogj/hass-security:master-omnibus
+        image: ghcr.io/hass-security/hass-security:master-omnibus
         cap_add:
           - SYS_RAWIO
         ports:
@@ -114,7 +114,7 @@ version: '3.5'
 services:
   hass-security:
     container_name: hass-security
-    image: ghcr.io/analogj/hass-security:master-omnibus
+    image: ghcr.io/hass-security/hass-security:master-omnibus
     cap_add:
       - SYS_RAWIO
       - SYS_ADMIN

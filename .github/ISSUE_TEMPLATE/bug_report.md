@@ -30,8 +30,6 @@ docker run -it --rm -p 8080:8080 \
 -e DEBUG=true \
 -e COLLECTOR_LOG_FILE=/opt/hass-security/config/collector.log \
 -e SCRUTINY_LOG_FILE=/opt/hass-security/config/web.log \
---name hass-security \
-ghcr.io/analogj/hass-security:master-omnibus
 
 # in another terminal trigger the collector
 docker exec hass-security hass-security-collector-metrics run
