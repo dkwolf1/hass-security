@@ -1,0 +1,20 @@
+name: Hass-Security
+slug: hass_security
+version: "0.8.1"
+description: Hard drive health dashboard & monitoring
+url: https://github.com/hass-security/hass-security
+startup: services
+boot: auto
+arch:
+  - amd64
+  - armv7
+  - aarch64
+init: false
+ingress: true
+ingress_port: 8080
+ingress_entry: /
+panel_icon: mdi:harddisk
+ports:
+  8080/tcp: 8080
+  8086/tcp: 8086
+command: hass-security start
