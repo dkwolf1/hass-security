@@ -120,8 +120,17 @@ docker run --rm \
   --device=/dev/sdb \
   -e COLLECTOR_API_ENDPOINT=http://SCRUTINY_WEB_IPADDRESS:8080 \
   --name hass-security-collector \
-  ghcr.io/analogj/hass-security:master-collector
+ghcr.io/analogj/hass-security:master-collector
 ```
+
+## Home Assistant OS Add-on
+
+Hass-Security can run as a custom add-on for Home Assistant OS.
+
+1. In Home Assistant, open **Settings → Add-ons → Add-on Store**.
+2. Click **Repositories** and add `https://github.com/hass-security/hass-security`.
+3. Locate **Hass-Security** in the store and click **Install**.
+4. Start the add-on and open the ingress link to access the dashboard.
 
 ## Manual Installation (without-Docker)
 
