@@ -30,11 +30,9 @@ docker run -it --rm -p 8080:8080 \
 -e DEBUG=true \
 -e COLLECTOR_LOG_FILE=/opt/hass-security/config/collector.log \
 -e SCRUTINY_LOG_FILE=/opt/hass-security/config/web.log \
---name scrutiny \
-ghcr.io/hass-security/hass-security:master-omnibus
 
 # in another terminal trigger the collector
-docker exec scrutiny hass-security-collector-metrics run
+docker exec hass-security hass-security-collector-metrics run
 ```
 
 The log files will be available on your host in the `config` directory. Please attach them to this issue. 
